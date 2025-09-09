@@ -4,13 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portofolio • iqbalrizanta</title>
-  <meta name="description" content="Portofolio sederhana untuk GitHub Pages: profil, proyek, artikel, dan kontak." />
+  <meta name="description" content="Portofolio sederhana untuk GitHub Pages: profil, proyek, artikel, berita crypto, dan kontak." />
   <meta name="theme-color" content="#0f172a" />
   <meta property="og:title" content="Portofolio • iqbalrizanta" />
-  <meta property="og:description" content="Portofolio sederhana untuk GitHub Pages: profil, proyek, artikel, dan kontak." />
+  <meta property="og:description" content="Portofolio sederhana untuk GitHub Pages: profil, proyek, artikel, berita crypto, dan kontak." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://dummyimage.com/1200x630/0f172a/ffffff&text=Portofolio" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230f172a'/><text x='50' y='62' font-size='54' text-anchor='middle' fill='white'>⚡</text></svg>"> 
   <style>
     :root{
       --bg:#0b1020; --card:#0f172a; --muted:#94a3b8; --text:#e2e8f0; --accent:#22d3ee; --ring:#38bdf8; --border:#1e293b;
@@ -30,41 +29,30 @@
     .btn:hover{box-shadow:0 10px 30px rgba(34,211,238,.1)}
     .btn:active{transform:scale(.98)}
     .accent{color:var(--accent)}
-
     .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:64px 0}
     .tag{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--border);background:rgba(34,211,238,.08);color:#cffafe;padding:6px 10px;border-radius:999px;font-size:12px}
     .title{font-size:44px;line-height:1.1;margin:14px 0 8px}
     .lead{color:var(--muted);max-width:60ch}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));border:1px solid var(--border);border-radius:20px;padding:20px}
-
     .grid{display:grid;gap:16px}
     .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
     .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
     @media (max-width:900px){.hero{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
-
     .section{padding:28px 0}
     .section h2{font-size:24px;margin:0 0 12px}
     .muted{color:var(--muted)}
     .chip{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px;color:#cbd5e1}
-
     .project{display:flex;flex-direction:column;gap:10px}
     .project h3{margin:0;font-size:18px}
     .project p{margin:0;color:var(--muted)}
-
     .footer{padding:28px 0;border-top:1px solid var(--border);color:var(--muted);font-size:14px}
-
     .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;border:1px solid var(--border);padding:2px 6px;border-radius:6px;background:#0b1224}
-
     .row{display:flex;gap:10px;flex-wrap:wrap}
     .input{height:44px;border-radius:12px;border:1px solid var(--border);background:#0a1122;color:var(--text);padding:0 12px;outline:0}
     .input:focus{box-shadow:0 0 0 4px rgba(56,189,248,.15)}
-
     .avatar{width:120px;height:120px;border-radius:28px;border:1px solid var(--border);background:radial-gradient(60% 60% at 30% 30%, #334155, #0f172a)}
-
     .badge{display:inline-flex;align-items:center;gap:8px}
     .svg{width:18px;height:18px}
-
-    /* small hover cards */
     .hvr{position:relative;overflow:hidden}
     .hvr::after{content:"";position:absolute;inset:-200% -40%;background:radial-gradient(40% 30% at 50% 50%, rgba(34,211,238,.15), transparent 60%);transform:translateY(-30%);transition:transform .5s ease}
     .hvr:hover::after{transform:translateY(0)}
@@ -75,11 +63,12 @@
     <div class="container nav-inner">
       <a href="#" class="brand">
         <span class="brand-badge">⚡</span>
-        <span>iqbal <span class="accent">rizanta</span></span>
+        <span>iqbal<span class="accent">rizanta</span></span>
       </a>
       <nav class="menu">
         <a href="#about">Tentang</a>
         <a href="#projects">Proyek</a>
+        <a href="#crypto-news">Crypto</a>
         <a href="#writing">Tulisan</a>
         <a href="#contact">Kontak</a>
         <button class="btn" id="themeBtn" aria-label="Toggle tema">🌗</button>
@@ -93,17 +82,11 @@
       <div>
         <span class="tag">👋 Halo! Saya <strong>iqbalrizanta</strong></span>
         <h1 class="title">Saya membangun <span class="accent">aplikasi web</span> yang cepat, rapi, dan mudah di-scale.</h1>
-        <p class="lead">Full‑stack developer yang suka TypeScript, React, dan Node.js. Di bawah ini beberapa proyek, tulisan, dan info kontak. Kode sumber situs ini tersedia di GitHub.</p>
+        <p class="lead">Full-stack developer yang suka TypeScript, React, dan Node.js. Di bawah ini beberapa proyek, tulisan, berita crypto, dan info kontak.</p>
         <div class="row" style="margin-top:16px">
           <a class="btn hvr" href="#projects">Lihat Proyek</a>
-          <a class="btn hvr" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn hvr" href="#crypto-news">Berita Crypto</a>
           <a class="btn hvr" href="mailto:emailkamu@contoh.com">Email</a>
-        </div>
-        <div class="row" style="margin-top:14px">
-          <span class="chip">#typescript</span>
-          <span class="chip">#react</span>
-          <span class="chip">#node</span>
-          <span class="chip">#nextjs</span>
         </div>
       </div>
       <div class="card">
@@ -115,17 +98,7 @@
     <!-- ABOUT -->
     <section id="about" class="section">
       <h2>Tentang</h2>
-      <p class="muted">Saya developer berbasis di Indonesia, fokus pada produk yang memberikan dampak. Saat ini tertarik pada DX tooling, data‑viz, dan AI‑assisted apps.</p>
-      <div class="row" style="margin-top:10px">
-        <span class="badge">
-          <svg class="svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12l9-5-9-5-9 5 9 5z"/></svg>
-          1+ bulan pengalaman
-        </span>
-        <span class="badge">
-          <svg class="svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 3.33 15 1.65 1.65 0 0 0 2 14H2a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 3.33 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 1 1 5.77 3.3l.06.06A1.65 1.65 0 0 0 7.65 3a1.65 1.65 0 0 0 1-1V2a2 2 0 1 1 4 0v.09A1.65 1.65 0 0 0 14 3.33 1.65 1.65 0 0 0 15.82 3.3l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c0 .56.2 1.09.57 1.51.61.71 1.03 1.65 1.03 2.69s-.42 1.98-1.03 2.69z"/></svg>
-          Remote‑friendly
-        </span>
-      </div>
+      <p class="muted">Saya developer berbasis di Indonesia, fokus pada produk yang memberikan dampak. Saat ini tertarik pada DX tooling, data-viz, dan AI-assisted apps.</p>
     </section>
 
     <!-- PROJECTS -->
@@ -136,11 +109,6 @@
           <h3>Crypto News Mini</h3>
           <p>Aplikasi berita kripto ringan dengan fetch API publik & caching sederhana.</p>
           <div class="row">
-            <span class="chip">React</span>
-            <span class="chip">Vite</span>
-            <span class="chip">REST</span>
-          </div>
-          <div class="row">
             <a class="btn" href="#">Demo</a>
             <a class="btn" href="#">Kode</a>
           </div>
@@ -148,10 +116,6 @@
         <article class="card project hvr">
           <h3>Charting Toolkit</h3>
           <p>Komponen chart reusable untuk dashboard performa.</p>
-          <div class="row">
-            <span class="chip">TypeScript</span>
-            <span class="chip">D3</span>
-          </div>
           <div class="row">
             <a class="btn" href="#">Demo</a>
             <a class="btn" href="#">Kode</a>
@@ -161,16 +125,17 @@
           <h3>Starter Next.js</h3>
           <p>Template opiniated: ESLint, Prettier, Testing, CI.</p>
           <div class="row">
-            <span class="chip">Next.js</span>
-            <span class="chip">CI/CD</span>
-            <span class="chip">Playwright</span>
-          </div>
-          <div class="row">
             <a class="btn" href="#">Demo</a>
             <a class="btn" href="#">Kode</a>
           </div>
         </article>
       </div>
+    </section>
+
+    <!-- CRYPTO NEWS -->
+    <section id="crypto-news" class="section">
+      <h2>Berita Crypto</h2>
+      <div id="cryptoContainer" class="grid grid-2"></div>
     </section>
 
     <!-- WRITING -->
@@ -194,27 +159,27 @@
     <section id="contact" class="section">
       <h2>Kontak</h2>
       <p class="muted">Terbuka untuk kolaborasi dan freelance. Kirim email atau DM media sosial di bawah.</p>
-      <form class="row" onsubmit="event.preventDefault(); alert('Terima kasih! Form ini contoh statis. Ganti dengan service formspree/email API.');">
+      <form class="row" onsubmit="event.preventDefault(); alert('Terima kasih! Form ini contoh statis.');">
         <input class="input" type="text" name="name" placeholder="Nama" required>
         <input class="input" type="email" name="email" placeholder="Email" required>
         <button class="btn" type="submit">Kirim</button>
       </form>
       <div class="row" style="margin-top:12px">
-        <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://x.com/" target="_blank" rel="noopener">X</a>
-        <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="#">GitHub</a>
+        <a class="btn" href="#">X</a>
+        <a class="btn" href="#">LinkedIn</a>
       </div>
     </section>
+  </main>
 
   <footer class="container footer">
-    <span>© <span id="year"></span> iqbalrizanta. Dibuat dengan HTML + sedikit CSS/JS.</span>
+    <span>© <span id="year"></span> iqbalrizanta. Dibuat dengan HTML + CSS + JS.</span>
   </footer>
 
   <script>
-    // Tahun otomatis
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Dark/Light toggle + simpan preferensi
+    // tema
     const THEME_KEY = 'pref-theme';
     const btn = document.getElementById('themeBtn');
     function setTheme(mode){
@@ -237,39 +202,31 @@
     }
     const saved = localStorage.getItem(THEME_KEY);
     if(saved) setTheme(saved);
-    btn.addEventListener('click',()=>{
-      const now = localStorage.getItem(THEME_KEY) === 'light' ? 'dark' : 'light';
-      setTheme(now);
-    });
-   <!-- CRYPTO NEWS -->
-<section id="crypto-news" class="section">
-  <h2>Berita Crypto Terbaru</h2>
-  <div id="news-container" class="grid grid-2 card" style="padding:16px">
-    Memuat berita...
-  </div>
-</section>
+    btn.addEventListener('click',()=>{setTheme(localStorage.getItem(THEME_KEY) === 'light' ? 'dark' : 'light')});
 
- // Load Crypto News (pakai RSS-to-JSON)
-    async function loadNews() {
-      try {
-        const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://cryptopanic.com/news/rss/");
+    // fetch berita crypto
+    async function loadCryptoNews(){
+      const container = document.getElementById('cryptoContainer');
+      container.innerHTML = '<p class="muted">Memuat berita crypto...</p>';
+      try{
+        const res = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN');
         const data = await res.json();
-        let html = "";
-        data.items.slice(0,4).forEach(news => {
-          html += `
-            <article class="card hvr" style="margin-bottom:12px;padding:16px">
-              <h3>${news.title}</h3>
-              <p class="muted">${new Date(news.pubDate).toLocaleDateString("id-ID")}</p>
-              <a class="btn" href="${news.link}" target="_blank">Baca Selengkapnya</a>
-            </article>
+        container.innerHTML = '';
+        data.Data.slice(0,4).forEach(item=>{
+          const card = document.createElement('article');
+          card.className = 'card hvr';
+          card.innerHTML = `
+            <h3>${item.title}</h3>
+            <p class="muted">${item.body.slice(0,100)}...</p>
+            <a class="btn" href="${item.url}" target="_blank">Baca</a>
           `;
+          container.appendChild(card);
         });
-        document.getElementById("news-container").innerHTML = html;
-      } catch (err) {
-        document.getElementById("news-container").innerHTML = "⚠️ Gagal memuat berita crypto.";
+      }catch(e){
+        container.innerHTML = '<p class="muted">Gagal memuat berita.</p>';
       }
     }
-    loadNews();
+    loadCryptoNews();
   </script>
 </body>
 </html>
