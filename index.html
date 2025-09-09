@@ -241,27 +241,35 @@
       const now = localStorage.getItem(THEME_KEY) === 'light' ? 'dark' : 'light';
       setTheme(now);
     });
-    // Load Crypto News
-    async function loadNews() {
-      try {
-        const res = await fetch("https://api.coingecko.com/api/v3/status_updates");
-        const data = await res.json();
-        let html = "";
-        data.status_updates.slice(0, 4).forEach(news => {
-          html += `
-            <article class="card hvr" style="margin-bottom:12px;padding:16px">
-              <h3>${news.project ? news.project.name : "Crypto News"}</h3>
-              <p class="muted">${news.description}</p>
-              ${news.project?.website ? `<a class="btn" href="${news.project.website}" target="_blank">Baca Selengkapnya</a>` : ""}
-            </article>
-          `;
-        });
-        document.getElementById("news-container").innerHTML = html;
-      } catch (err) {
-        document.getElementById("news-container").innerHTML = "⚠️ Gagal memuat berita crypto.";
-      }
+   <!-- CRYPTO NEWS -->
+<section id="crypto-news" class="section">
+  <h2>Berita Crypto Terbaru</h2>
+  <div id="news-container" class="grid grid-2 card" style="padding:16px">
+    Memuat berita...
+  </div>
+</section>
+
+<script>
+  async function loadNews() {
+    try {
+      const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://cryptopanic.com/news/rss/");
+      const data = await res.json();
+      let html = "";
+      data.items.slice(0,4).forEach(news => {
+        html += `
+          <article class="card hvr" style="margin-bottom:12px;padding:16px">
+            <h3>${news.title}</h3>
+            <p class="muted">${new Date(news.pubDate).toLocaleDateString("id-ID")}</p>
+            <a class="btn" href="${news.link}" target="_blank">Baca Selengkapnya</a>
+          </article>
+        `;
+      });
+      document.getElementById("news-container").innerHTML = html;
+    } catch (err) {
+      document.getElementById("news-container").innerHTML = "⚠️ Gagal memuat berita crypto.";
     }
-    loadNews();
+  }
+  loadNews();
   </script>
 </body>
 </html>
