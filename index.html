@@ -43,12 +43,8 @@
   </main>
 
   <script>
-    // === SCRIPT LAMA ===
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // tema
+    // === THEME ===
     const THEME_KEY = 'pref-theme';
-    const btn = document.getElementById('themeBtn');
     function setTheme(mode){
       if(mode==='light'){
         document.documentElement.style.setProperty('--bg','#f8fafc');
@@ -69,45 +65,18 @@
     }
     const saved = localStorage.getItem(THEME_KEY);
     if(saved) setTheme(saved);
-    btn.addEventListener('click',()=>{setTheme(localStorage.getItem(THEME_KEY) === 'light' ? 'dark' : 'light')});
 
-    // fetch berita crypto (versi lama)
-    async function loadCryptoNews(){
-      const container = document.getElementById('cryptoContainer');
-      container.innerHTML = '<p class="muted">Memuat berita crypto...</p>';
-      try{
-        const res = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN');
-        const data = await res.json();
-        container.innerHTML = '';
-        data.Data.slice(0,4).forEach(item=>{
-          const card = document.createElement('article');
-          card.className = 'card hvr';
-          card.innerHTML = `
-            <h3>${item.title}</h3>
-            <p class="muted">${item.body.slice(0,100)}...</p>
-            <a class="btn" href="${item.url}" target="_blank">Baca</a>
-          `;
-          container.appendChild(card);
-        });
-      }catch(e){
-        container.innerHTML = '<p class="muted">Gagal memuat berita.</p>';
-      }
-    }
-    loadCryptoNews();
-
-    // === FITUR BARU ===
+    // === CRYPTO NEWS ===
     const containerNews = document.getElementById('cryptoContainer');
     const searchInput = document.getElementById('searchInput');
     const refreshBtn = document.getElementById('refreshBtn');
     const toggleAutoBtn = document.getElementById('toggleAutoBtn');
-    const priceContainer = document.getElementById('priceContainer');
 
     let newsData = [];
     let autoRefresh = false;
     let intervalId = null;
 
-    // fetch berita crypto (versi baru untuk pencarian)
-    async function loadCryptoNewsExtended(){
+    async function loadCryptoNews(){
       containerNews.innerHTML = '<p class="muted">Memuat berita crypto...</p>';
       try{
         const res = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN');
@@ -137,32 +106,31 @@
       });
     }
 
-    // pencarian berita
     searchInput.addEventListener('input', e=>{
       const q = e.target.value.toLowerCase();
       const filtered = newsData.filter(n=>n.title.toLowerCase().includes(q));
       renderNews(filtered);
     });
 
-    // tombol refresh
-    refreshBtn.addEventListener('click', loadCryptoNewsExtended);
+    refreshBtn.addEventListener('click', loadCryptoNews);
 
-    // auto refresh
     toggleAutoBtn.addEventListener('click', ()=>{
       autoRefresh = !autoRefresh;
       toggleAutoBtn.textContent = autoRefresh ? "⏱️ Auto-refresh: ON" : "⏱️ Auto-refresh: OFF";
       if(autoRefresh){
-        intervalId = setInterval(loadCryptoNewsExtended, 5*60*1000);
+        intervalId = setInterval(loadCryptoNews, 5*60*1000);
       }else{
         clearInterval(intervalId);
       }
     });
 
-    // harga crypto live
+    // === CRYPTO PRICES ===
+    const priceContainer = document.getElementById('priceContainer');
     async function loadPrices(){
       try{
         const res = await fetch("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,DOGE&tsyms=USD,IDR");
         const data = await res.json();
+        if(!data || Object.keys(data).length === 0) throw new Error("API kosong");
         priceContainer.innerHTML = '';
         Object.keys(data).forEach(symbol=>{
           const card = document.createElement('div');
@@ -175,12 +143,12 @@
           priceContainer.appendChild(card);
         });
       }catch(e){
-        priceContainer.innerHTML = '<p class="muted">Gagal memuat harga.</p>';
+        priceContainer.innerHTML = '<p class="muted">Gagal memuat harga crypto.</p>';
       }
     }
 
-    // load awal
-    loadCryptoNewsExtended();
+    // === INIT ===
+    loadCryptoNews();
     loadPrices();
     setInterval(loadPrices, 60000); // update harga tiap 1 menit
   </script>
