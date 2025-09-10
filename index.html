@@ -96,7 +96,7 @@
     .fade{opacity:0;transform:translateY(20px);transition:all .6s ease}
     .fade.show{opacity:1;transform:none}
   </style>
-  <!-- Chart.js untuk Skill Chart -->
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -113,6 +113,7 @@
         <a href="#skills">Skill</a>
         <a href="#crypto">Crypto</a>
         <a href="#contact">Kontak</a>
+        <button class="btn" id="langBtn" aria-label="Toggle bahasa">EN/ID</button>
         <button class="btn" id="themeBtn" aria-label="Toggle tema">🌗</button>
       </nav>
     </div>
@@ -123,8 +124,8 @@
     <section class="hero">
       <div>
         <span class="tag">👋 Halo! Saya <strong>iqbalrizanta</strong></span>
-        <h1 class="title">Saya membangun <span class="accent">aplikasi web</span> yang cepat, rapi, dan mudah di-scale.</h1>
-        <p class="lead">Full-stack developer yang suka TypeScript, React, dan Node.js. Di bawah ini beberapa proyek, tulisan, dan info kontak. Kode sumber situs ini tersedia di GitHub.</p>
+        <h1 class="title"></h1>
+        <p class="lead"></p>
         <div class="row" style="margin-top:16px">
           <a class="btn hvr" href="#projects">Lihat Proyek</a>
           <a class="btn hvr" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
@@ -146,12 +147,12 @@
     <!-- ABOUT -->
     <section id="about" class="section">
       <h2>Tentang</h2>
-      <p class="muted">Saya developer berbasis di Indonesia, fokus pada produk yang memberikan dampak. Saat ini tertarik pada DX tooling, data-viz, dan AI-assisted apps.</p>
+      <p class="muted"></p>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="section">
-      <h2>Proyek Pilihan</h2>
+      <h2></h2>
       <div class="grid grid-3">
         <article class="card project hvr">
           <h3>Crypto News Mini</h3>
@@ -171,7 +172,7 @@
 
     <!-- WRITING -->
     <section id="writing" class="section">
-      <h2>Tulisan Terbaru</h2>
+      <h2></h2>
       <div class="grid grid-2">
         <article class="card hvr">
           <h3>Migrasi ke TypeScript di proyek lama</h3>
@@ -186,13 +187,13 @@
 
     <!-- SKILLS -->
     <section id="skills" class="section">
-      <h2>Skill</h2>
+      <h2></h2>
       <canvas id="skillsChart" height="200"></canvas>
     </section>
 
     <!-- CRYPTO PRICE -->
     <section id="crypto" class="section">
-      <h2>Harga Crypto</h2>
+      <h2></h2>
       <div class="card">
         <p><strong>Bitcoin (BTC):</strong> <span id="btc-price">Memuat...</span></p>
         <p><strong>Ethereum (ETH):</strong> <span id="eth-price">Memuat...</span></p>
@@ -201,7 +202,7 @@
 
     <!-- CONTACT -->
     <section id="contact" class="section">
-      <h2>Kontak</h2>
+      <h2></h2>
       <p class="muted">Terbuka untuk kolaborasi dan freelance. Kirim email atau DM media sosial di bawah.</p>
       <div class="row" style="margin-top:12px">
         <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
@@ -210,14 +211,14 @@
       </div>
     </section>
 
-    <!-- CONTACT FORM TAMBAHAN -->
+    <!-- CONTACT FORM -->
     <section class="section" style="max-width:600px">
       <h2>Kirim Pesan</h2>
       <form id="contact-form" class="grid" style="gap:12px">
         <input type="text" class="input" placeholder="Nama" required>
         <input type="email" class="input" placeholder="Email" required>
         <textarea class="input" style="height:100px" placeholder="Pesan..." required></textarea>
-        <button class="btn hvr" type="submit">Kirim</button>
+        <button class="btn hvr" type="submit"></button>
       </form>
     </section>
   </main>
@@ -226,16 +227,16 @@
     <span>© <span id="year"></span> iqbalrizanta. Dibuat dengan HTML + sedikit CSS/JS.</span>
   </footer>
 
-  <!-- Scroll to top button -->
   <button id="scrollTopBtn" title="Kembali ke atas">⬆️</button>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     // Tahun otomatis
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Dark/Light toggle + simpan preferensi
+    // Dark/Light toggle
     const THEME_KEY = 'pref-theme';
-    const btn = document.getElementById('themeBtn');
+    const themeBtn = document.getElementById('themeBtn');
     function setTheme(mode){
       if(mode==='light'){
         document.documentElement.style.setProperty('--bg','#f8fafc');
@@ -254,14 +255,60 @@
       }
       localStorage.setItem(THEME_KEY, mode);
     }
-    const saved = localStorage.getItem(THEME_KEY);
-    if(saved) setTheme(saved);
-    btn.addEventListener('click',()=>{
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if(savedTheme) setTheme(savedTheme);
+    themeBtn.addEventListener('click',()=>{
       const now = localStorage.getItem(THEME_KEY) === 'light' ? 'dark' : 'light';
       setTheme(now);
     });
 
-    // Crypto News fetch
+    // Bahasa toggle
+    const LANG_KEY = 'pref-lang';
+    const langBtn = document.getElementById('langBtn');
+    const texts = {
+      id: {
+        heroTitle: 'Saya membangun <span class="accent">aplikasi web</span> yang cepat, rapi, dan mudah di-scale.',
+        heroLead: 'Full-stack developer yang suka TypeScript, React, dan Node.js. Di bawah ini beberapa proyek, tulisan, dan info kontak. Kode sumber situs ini tersedia di GitHub.',
+        projects: 'Proyek Pilihan',
+        writing: 'Tulisan Terbaru',
+        skills: 'Skill',
+        crypto: 'Harga Crypto',
+        contact: 'Kontak',
+        sendMessage: 'Kirim Pesan',
+        aboutText: 'Saya developer berbasis di Indonesia, fokus pada produk yang memberikan dampak. Saat ini tertarik pada DX tooling, data-viz, dan AI-assisted apps.'
+      },
+      en: {
+        heroTitle: 'I build <span class="accent">web applications</span> that are fast, clean, and scalable.',
+        heroLead: 'Full-stack developer passionate about TypeScript, React, and Node.js. Below are some projects, writings, and contact info. Source code available on GitHub.',
+        projects: 'Selected Projects',
+        writing: 'Latest Writings',
+        skills: 'Skills',
+        crypto: 'Crypto Prices',
+        contact: 'Contact',
+        sendMessage: 'Send Message',
+        aboutText: 'I am a developer based in Indonesia, focused on impactful products. Currently interested in DX tooling, data visualization, and AI-assisted apps.'
+      }
+    };
+    function setLang(lang){
+      document.querySelector('.hero .title').innerHTML = texts[lang].heroTitle;
+      document.querySelector('.hero .lead').textContent = texts[lang].heroLead;
+      document.querySelector('#projects h2').textContent = texts[lang].projects;
+      document.querySelector('#writing h2').textContent = texts[lang].writing;
+      document.querySelector('#skills h2').textContent = texts[lang].skills;
+      document.querySelector('#crypto h2').textContent = texts[lang].crypto;
+      document.querySelector('#contact h2').textContent = texts[lang].contact;
+      document.querySelector('#about p').textContent = texts[lang].aboutText;
+      document.querySelector('#contact-form button').textContent = texts[lang].sendMessage;
+      localStorage.setItem(LANG_KEY, lang);
+    }
+    const savedLang = localStorage.getItem(LANG_KEY) || 'id';
+    setLang(savedLang);
+    langBtn.addEventListener('click',()=>{
+      const newLang = localStorage.getItem(LANG_KEY) === 'id' ? 'en' : 'id';
+      setLang(newLang);
+    });
+
+    // Crypto News
     async function loadCryptoNews(){
       try{
         const res = await fetch("https://api.coingecko.com/api/v3/news");
@@ -274,7 +321,7 @@
           a.target = "_blank";
           a.rel = "noopener";
           a.textContent = "• " + n.title;
-          a.style.display = "block";
+          a.style.display="block";
           container.appendChild(a);
         });
       }catch(e){
@@ -283,75 +330,7 @@
     }
     loadCryptoNews();
 
-    // Scroll to top
-    const scrollBtn=document.getElementById("scrollTopBtn");
-    window.addEventListener("scroll",()=>{
-      if(document.documentElement.scrollTop>200){
-        scrollBtn.style.display="block";
-      }else{
-        scrollBtn.style.display="none";
-      }
-    });
-    scrollBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
-
-    // Reader mode toggle pakai tombol "R"
-    document.addEventListener("keydown",e=>{
-      if(e.key.toLowerCase()==="r"){
-        document.body.classList.toggle("reader-mode");
-      }
-    });
-
-    // Fade-in tiap section
-    const observer=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add("show");
-        }
-      });
-    },{threshold:.15});
-    document.querySelectorAll(".section, .hero").forEach(sec=>{
-      sec.classList.add("fade");
-      observer.observe(sec);
-    });
-
-    // Simple contact form handler (demo)
-    const form=document.getElementById("contact-form");
-    if(form){
-      form.addEventListener("submit",e=>{
-        e.preventDefault();
-        alert("Pesan terkirim! (demo)");
-        form.reset();
-      });
-    }
-
-    // SKILL CHART pakai Chart.js
-    const ctx = document.getElementById('skillsChart');
-    new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: ['TypeScript','React','Node.js','Next.js','CSS','Database'],
-        datasets: [{
-          label: 'Skill Level',
-          data: [90, 85, 80, 75, 70, 65],
-          backgroundColor: 'rgba(34,211,238,0.2)',
-          borderColor: 'rgba(34,211,238,1)',
-          borderWidth: 2,
-          pointBackgroundColor: 'rgba(34,211,238,1)'
-        }]
-      },
-      options: {
-        scales: {
-          r: {
-            angleLines: { color: '#1e293b' },
-            grid: { color: '#1e293b' },
-            pointLabels: { color: '#e2e8f0' },
-            ticks: { color: '#e2e8f0', backdropColor: 'transparent' }
-          }
-        }
-      }
-    });
-
-    // CRYPTO PRICE fetch
+    // Crypto Prices
     async function loadPrices(){
       try{
         const res=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd");
@@ -364,7 +343,57 @@
       }
     }
     loadPrices();
-    setInterval(loadPrices, 60000); // update tiap menit
+    setInterval(loadPrices,60000);
+
+    // Skill Chart
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    new Chart(ctx,{
+      type:'radar',
+      data:{
+        labels:['TypeScript','React','Node.js','Next.js','CSS'],
+        datasets:[{
+          label:'Skill Level',
+          data:[90,85,80,75,80],
+          fill:true,
+          backgroundColor:'rgba(34,211,238,.2)',
+          borderColor:'#22d3ee',
+          pointBackgroundColor:'#22d3ee',
+          pointBorderColor:'#fff'
+        }]
+      },
+      options:{
+        scales:{
+          r:{
+            angleLines:{color:'#1e293b'},
+            grid:{color:'#1e293b'},
+            pointLabels:{color:'#e2e8f0'},
+            ticks:{color:'#e2e8f0',backdropColor:'transparent'}
+          }
+        }
+      }
+    });
+
+    // Scroll to top
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.onscroll = function(){
+      scrollBtn.style.display = document.body.scrollTop>300 || document.documentElement.scrollTop>300 ? "block":"none";
+    };
+    scrollBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // Reader mode + fade-in animation
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.body.classList.add('reader-mode');
+      const faders = document.querySelectorAll('.fade');
+      const appearOptions = {threshold:0.1, rootMargin:"0px 0px -50px 0px"};
+      const appearOnScroll = new IntersectionObserver(function(entries, observer){
+        entries.forEach(entry=>{
+          if(!entry.isIntersecting)return;
+          entry.classList.add('show');
+          observer.unobserve(entry.target);
+        });
+      },appearOptions);
+      faders.forEach(fader=>appearOnScroll.observe(fader));
+    });
   </script>
 </body>
 </html>
