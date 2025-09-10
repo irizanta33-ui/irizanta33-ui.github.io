@@ -67,6 +67,34 @@
     .hvr{position:relative;overflow:hidden}
     .hvr::after{content:"";position:absolute;inset:-200% -40%;background:radial-gradient(40% 30% at 50% 50%, rgba(34,211,238,.15), transparent 60%);transform:translateY(-30%);transition:transform .5s ease}
     .hvr:hover::after{transform:translateY(0)}
+
+    /* Scroll to top button */
+    #scrollTopBtn {
+      display:none;
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      z-index:100;
+      border:none;
+      outline:none;
+      background:var(--card);
+      color:var(--text);
+      cursor:pointer;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      box-shadow:0 4px 14px rgba(0,0,0,.3);
+      transition:opacity .3s;
+    }
+    #scrollTopBtn:hover{opacity:.85}
+
+    /* Reader mode */
+    .reader-mode body{font-size:18px;line-height:1.8}
+    .reader-mode p{max-width:70ch}
+
+    /* Fade-in animation */
+    .fade{opacity:0;transform:translateY(20px);transition:all .6s ease}
+    .fade.show{opacity:1;transform:none}
   </style>
 </head>
 <body>
@@ -162,11 +190,25 @@
         <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </section>
+
+    <!-- CONTACT FORM TAMBAHAN -->
+    <section class="section" style="max-width:600px">
+      <h2>Kirim Pesan</h2>
+      <form id="contact-form" class="grid" style="gap:12px">
+        <input type="text" class="input" placeholder="Nama" required>
+        <input type="email" class="input" placeholder="Email" required>
+        <textarea class="input" style="height:100px" placeholder="Pesan..." required></textarea>
+        <button class="btn hvr" type="submit">Kirim</button>
+      </form>
+    </section>
   </main>
 
   <footer class="container footer">
     <span>© <span id="year"></span> iqbalrizanta. Dibuat dengan HTML + sedikit CSS/JS.</span>
   </footer>
+
+  <!-- Scroll to top button -->
+  <button id="scrollTopBtn" title="Kembali ke atas">⬆️</button>
 
   <script>
     // Tahun otomatis
@@ -221,40 +263,7 @@
       }
     }
     loadCryptoNews();
-      <!-- Tambahan fitur -->
-  <button id="scrollTopBtn" title="Kembali ke atas">⬆️</button>
 
-  <style>
-    /* Scroll to top button */
-    #scrollTopBtn {
-      display:none;
-      position:fixed;
-      bottom:24px;
-      right:24px;
-      z-index:100;
-      border:none;
-      outline:none;
-      background:var(--card);
-      color:var(--text);
-      cursor:pointer;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      box-shadow:0 4px 14px rgba(0,0,0,.3);
-      transition:opacity .3s;
-    }
-    #scrollTopBtn:hover{opacity:.85}
-
-    /* Reader mode toggle */
-    .reader-mode body{font-size:18px;line-height:1.8}
-    .reader-mode p{max-width:70ch}
-
-    /* Fade-in animation */
-    .fade{opacity:0;transform:translateY(20px);transition:all .6s ease}
-    .fade.show{opacity:1;transform:none}
-  </style>
-
-  <script>
     // Scroll to top
     const scrollBtn=document.getElementById("scrollTopBtn");
     window.addEventListener("scroll",()=>{
@@ -266,7 +275,7 @@
     });
     scrollBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 
-    // Reader mode toggle pakai shortcut "R"
+    // Reader mode toggle pakai tombol "R"
     document.addEventListener("keydown",e=>{
       if(e.key.toLowerCase()==="r"){
         document.body.classList.toggle("reader-mode");
@@ -286,7 +295,7 @@
       observer.observe(sec);
     });
 
-    // Simple contact form handler (hanya alert demo)
+    // Simple contact form handler (demo)
     const form=document.getElementById("contact-form");
     if(form){
       form.addEventListener("submit",e=>{
@@ -295,19 +304,6 @@
         form.reset();
       });
     }
-  </script>
-
-  <!-- Form kontak tambahan -->
-  <section class="section container" style="max-width:600px">
-    <h2>Kirim Pesan</h2>
-    <form id="contact-form" class="grid" style="gap:12px">
-      <input type="text" class="input" placeholder="Nama" required>
-      <input type="email" class="input" placeholder="Email" required>
-      <textarea class="input" style="height:100px" placeholder="Pesan..." required></textarea>
-      <button class="btn hvr" type="submit">Kirim</button>
-    </form>
-  </section>
-
   </script>
 </body>
 </html>
