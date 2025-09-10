@@ -6,23 +6,28 @@
   <title>Portofolio • iqbalrizanta</title>
   <meta name="description" content="Portofolio sederhana untuk GitHub Pages: profil, proyek, artikel, dan kontak." />
   <meta name="theme-color" content="#0f172a" />
+  <meta property="og:title" content="Portofolio • iqbalrizanta" />
+  <meta property="og:description" content="Portofolio sederhana untuk GitHub Pages: profil, proyek, artikel, dan kontak." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0f172a/ffffff&text=Portofolio" />
   <style>
     :root{
       --bg:#0b1020; --card:#0f172a; --muted:#94a3b8; --text:#e2e8f0; --accent:#22d3ee; --ring:#38bdf8; --border:#1e293b;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,#0b1020,#0c1226);color:var(--text)}
-
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,#0b1020, #0b1020 50%, #0c1226);color:var(--text)}
     a{color:inherit;text-decoration:none}
     .container{max-width:1100px;margin:auto;padding:24px}
     .nav{position:sticky;top:0;backdrop-filter:saturate(160%) blur(8px);background:rgba(11,16,32,.6);border-bottom:1px solid var(--border);z-index:50}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:10px;font-weight:700}
     .brand-badge{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--card);border:1px solid var(--border)}
+    .nav a:hover{opacity:.9}
     .menu{display:flex;gap:18px;align-items:center}
     .btn{display:inline-grid;place-items:center;height:40px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:var(--card);transition:transform .05s ease, box-shadow .2s ease}
     .btn:hover{box-shadow:0 10px 30px rgba(34,211,238,.1)}
+    .btn:active{transform:scale(.98)}
     .accent{color:var(--accent)}
 
     .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:64px 0}
@@ -43,76 +48,89 @@
 
     .project{display:flex;flex-direction:column;gap:10px}
     .project h3{margin:0;font-size:18px}
+    .project p{margin:0;color:var(--muted)}
+
     .footer{padding:28px 0;border-top:1px solid var(--border);color:var(--muted);font-size:14px}
+
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;border:1px solid var(--border);padding:2px 6px;border-radius:6px;background:#0b1224}
+
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .input{height:44px;border-radius:12px;border:1px solid var(--border);background:#0a1122;color:var(--text);padding:0 12px;outline:0}
+    .input:focus{box-shadow:0 0 0 4px rgba(56,189,248,.15)}
 
     .avatar{width:120px;height:120px;border-radius:28px;border:1px solid var(--border);object-fit:cover}
 
-    /* Scroll-to-top button */
-    #scrollTopBtn {
-      position: fixed; bottom: 30px; right: 30px; z-index: 99;
-      border: none; outline: none;
-      background: var(--accent); color:#0f172a;
-      cursor: pointer; padding:14px; border-radius:50%; font-size:18px;
-      display: none; transition:opacity .3s ease;
-    }
-    #scrollTopBtn:hover {opacity:.8;}
+    .badge{display:inline-flex;align-items:center;gap:8px}
+    .svg{width:18px;height:18px}
 
-    /* Fade animation */
-    .fade{opacity:0; transform:translateY(30px); transition:all .6s ease;}
-    .fade.show{opacity:1; transform:translateY(0);}
+    /* small hover cards */
+    .hvr{position:relative;overflow:hidden}
+    .hvr::after{content:"";position:absolute;inset:-200% -40%;background:radial-gradient(40% 30% at 50% 50%, rgba(34,211,238,.15), transparent 60%);transform:translateY(-30%);transition:transform .5s ease}
+    .hvr:hover::after{transform:translateY(0)}
   </style>
 </head>
 <body>
   <header class="nav">
     <div class="container nav-inner">
-      <a href="#" class="brand"><span class="brand-badge">⚡</span><span>iqbal<span class="accent">rizanta</span></span></a>
+      <a href="#" class="brand">
+        <span class="brand-badge">⚡</span>
+        <span>iqbal<span class="accent">rizanta</span></span>
+      </a>
       <nav class="menu">
-        <a href="#about">Tentang</a><a href="#projects">Proyek</a><a href="#writing">Tulisan</a><a href="#contact">Kontak</a>
-        <a class="btn" href="cv.pdf" download>📄 CV</a>
-        <button class="btn" id="themeBtn">🌗</button>
+        <a href="#about">Tentang</a>
+        <a href="#projects">Proyek</a>
+        <a href="#writing">Tulisan</a>
+        <a href="#contact">Kontak</a>
+        <button class="btn" id="themeBtn" aria-label="Toggle tema">🌗</button>
       </nav>
     </div>
   </header>
 
   <main class="container">
     <!-- HERO -->
-    <section class="hero fade">
+    <section class="hero">
       <div>
         <span class="tag">👋 Halo! Saya <strong>iqbalrizanta</strong></span>
         <h1 class="title">Saya membangun <span class="accent">aplikasi web</span> yang cepat, rapi, dan mudah di-scale.</h1>
-        <p class="lead">Full-stack developer yang suka TypeScript, React, dan Node.js.</p>
+        <p class="lead">Full-stack developer yang suka TypeScript, React, dan Node.js. Di bawah ini beberapa proyek, tulisan, dan info kontak. Kode sumber situs ini tersedia di GitHub.</p>
         <div class="row" style="margin-top:16px">
-          <a class="btn" href="#projects">Lihat Proyek</a>
-          <a class="btn" href="https://github.com/" target="_blank">GitHub</a>
-          <a class="btn" href="mailto:emailkamu@contoh.com">Email</a>
+          <a class="btn hvr" href="#projects">Lihat Proyek</a>
+          <a class="btn hvr" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn hvr" href="mailto:emailkamu@contoh.com">Email</a>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <span class="chip">#typescript</span>
+          <span class="chip">#react</span>
+          <span class="chip">#node</span>
+          <span class="chip">#nextjs</span>
         </div>
       </div>
       <div class="card">
-        <img src="logo.png" alt="iqbalcryptoguy" class="avatar" />
+        <img src="Screenshot 2025-09-02 230308.png" alt="iqbalcryptoguy" class="avatar" />
         <div style="margin-top:12px" class="muted">iqbalcryptoguy</div>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section fade">
+    <section id="about" class="section">
       <h2>Tentang</h2>
       <p class="muted">Saya developer berbasis di Indonesia, fokus pada produk yang memberikan dampak. Saat ini tertarik pada DX tooling, data-viz, dan AI-assisted apps.</p>
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects" class="section fade">
+    <section id="projects" class="section">
       <h2>Proyek Pilihan</h2>
       <div class="grid grid-3">
-        <article class="card project">
+        <article class="card project hvr">
           <h3>Crypto News Mini</h3>
-          <p>Aplikasi berita kripto ringan.</p>
+          <p>Aplikasi berita kripto ringan dengan fetch API publik & caching sederhana.</p>
           <div id="crypto-news" class="muted">Memuat berita kripto...</div>
         </article>
-        <article class="card project">
+        <article class="card project hvr">
           <h3>Charting Toolkit</h3>
-          <p>Komponen chart reusable untuk dashboard.</p>
+          <p>Komponen chart reusable untuk dashboard performa.</p>
         </article>
-        <article class="card project">
+        <article class="card project hvr">
           <h3>Starter Next.js</h3>
           <p>Template opiniated: ESLint, Prettier, Testing, CI.</p>
         </article>
@@ -120,69 +138,89 @@
     </section>
 
     <!-- WRITING -->
-    <section id="writing" class="section fade">
+    <section id="writing" class="section">
       <h2>Tulisan Terbaru</h2>
       <div class="grid grid-2">
-        <article class="card"><h3>Migrasi ke TypeScript</h3><p class="muted">Strategi bertahap, jebakan umum.</p></article>
-        <article class="card"><h3>Dashboard tanpa framework</h3><p class="muted">HTML + Web Components + JS.</p></article>
+        <article class="card hvr">
+          <h3>Migrasi ke TypeScript di proyek lama</h3>
+          <p class="muted">Strategi bertahap, jebakan umum, dan tips tooling.</p>
+        </article>
+        <article class="card hvr">
+          <h3>Membuat dashboard ringan tanpa framework besar</h3>
+          <p class="muted">HTML + Web Components + sedikit sprinkle JS.</p>
+        </article>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section fade">
+    <section id="contact" class="section">
       <h2>Kontak</h2>
-      <p class="muted">Terbuka untuk kolaborasi dan freelance.</p>
+      <p class="muted">Terbuka untuk kolaborasi dan freelance. Kirim email atau DM media sosial di bawah.</p>
       <div class="row" style="margin-top:12px">
-        <a class="btn" href="https://github.com/" target="_blank">GitHub</a>
-        <a class="btn" href="https://x.com/" target="_blank">X</a>
-        <a class="btn" href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
-        <a class="btn" href="https://instagram.com/" target="_blank">Instagram</a>
+        <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://x.com/" target="_blank" rel="noopener">X</a>
+        <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </section>
   </main>
 
   <footer class="container footer">
-    <span>© <span id="year"></span> iqbalrizanta.</span>
+    <span>© <span id="year"></span> iqbalrizanta. Dibuat dengan HTML + sedikit CSS/JS.</span>
   </footer>
-
-  <!-- Scroll-to-top -->
-  <button id="scrollTopBtn">⬆</button>
 
   <script>
     // Tahun otomatis
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Dark/Light toggle
-    const THEME_KEY='pref-theme';const btn=document.getElementById('themeBtn');
-    function setTheme(mode){if(mode==='light'){document.documentElement.style.setProperty('--bg','#f8fafc');document.documentElement.style.setProperty('--card','#ffffff');document.documentElement.style.setProperty('--text','#0f172a');document.documentElement.style.setProperty('--muted','#475569');document.documentElement.style.setProperty('--border','#e2e8f0');document.body.style.background='linear-gradient(180deg,#f8fafc,#f1f5f9)';}else{document.documentElement.style.removeProperty('--bg');document.documentElement.style.removeProperty('--card');document.documentElement.style.removeProperty('--text');document.documentElement.style.removeProperty('--muted');document.documentElement.style.removeProperty('--border');document.body.style.background='linear-gradient(180deg,#0b1020,#0c1226)';}localStorage.setItem(THEME_KEY,mode);}
-    const saved=localStorage.getItem(THEME_KEY);if(saved) setTheme(saved);
-    btn.addEventListener('click',()=>{const now=localStorage.getItem(THEME_KEY)==='light'?'dark':'light';setTheme(now);});
+    // Dark/Light toggle + simpan preferensi
+    const THEME_KEY = 'pref-theme';
+    const btn = document.getElementById('themeBtn');
+    function setTheme(mode){
+      if(mode==='light'){
+        document.documentElement.style.setProperty('--bg','#f8fafc');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--text','#0f172a');
+        document.documentElement.style.setProperty('--muted','#475569');
+        document.documentElement.style.setProperty('--border','#e2e8f0');
+        document.body.style.background = 'linear-gradient(180deg,#f8fafc,#f1f5f9)';
+      }else{
+        document.documentElement.style.removeProperty('--bg');
+        document.documentElement.style.removeProperty('--card');
+        document.documentElement.style.removeProperty('--text');
+        document.documentElement.style.removeProperty('--muted');
+        document.documentElement.style.removeProperty('--border');
+        document.body.style.background = 'linear-gradient(180deg,#0b1020,#0c1226)';
+      }
+      localStorage.setItem(THEME_KEY, mode);
+    }
+    const saved = localStorage.getItem(THEME_KEY);
+    if(saved) setTheme(saved);
+    btn.addEventListener('click',()=>{
+      const now = localStorage.getItem(THEME_KEY) === 'light' ? 'dark' : 'light';
+      setTheme(now);
+    });
 
-    // Crypto News
+    // Crypto News fetch
     async function loadCryptoNews(){
       try{
-        const res=await fetch("https://api.coingecko.com/api/v3/news");
-        const data=await res.json();
-        const container=document.getElementById("crypto-news");
-        container.innerHTML="";
+        const res = await fetch("https://api.coingecko.com/api/v3/news");
+        const data = await res.json();
+        const container = document.getElementById("crypto-news");
+        container.innerHTML = "";
         data.data.slice(0,3).forEach(n=>{
-          const a=document.createElement("a");
-          a.href=n.url;a.target="_blank";a.textContent="• "+n.title;
-          a.style.display="block";container.appendChild(a);
+          const a = document.createElement("a");
+          a.href = n.url;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.textContent = "• " + n.title;
+          a.style.display = "block";
+          container.appendChild(a);
         });
-      }catch(e){document.getElementById("crypto-news").textContent="Gagal memuat berita.";}
+      }catch(e){
+        document.getElementById("crypto-news").textContent = "Gagal memuat berita.";
+      }
     }
     loadCryptoNews();
-
-    // Scroll to top
-    const scrollBtn=document.getElementById("scrollTopBtn");
-    window.onscroll=()=>{if(document.documentElement.scrollTop>300){scrollBtn.style.display="block";}else{scrollBtn.style.display="none";}};
-    scrollBtn.onclick=()=>{window.scrollTo({top:0,behavior:"smooth"});};
-
-    // Fade-in on scroll
-    const faders=document.querySelectorAll(".fade");
-    const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show");});},{threshold:0.2});
-    faders.forEach(f=>observer.observe(f));
   </script>
 </body>
 </html>
