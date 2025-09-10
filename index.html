@@ -96,6 +96,8 @@
     .fade{opacity:0;transform:translateY(20px);transition:all .6s ease}
     .fade.show{opacity:1;transform:none}
   </style>
+  <!-- Chart.js untuk Skill Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header class="nav">
@@ -108,6 +110,8 @@
         <a href="#about">Tentang</a>
         <a href="#projects">Proyek</a>
         <a href="#writing">Tulisan</a>
+        <a href="#skills">Skill</a>
+        <a href="#crypto">Crypto</a>
         <a href="#contact">Kontak</a>
         <button class="btn" id="themeBtn" aria-label="Toggle tema">🌗</button>
       </nav>
@@ -177,6 +181,21 @@
           <h3>Membuat dashboard ringan tanpa framework besar</h3>
           <p class="muted">HTML + Web Components + sedikit sprinkle JS.</p>
         </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <h2>Skill</h2>
+      <canvas id="skillsChart" height="200"></canvas>
+    </section>
+
+    <!-- CRYPTO PRICE -->
+    <section id="crypto" class="section">
+      <h2>Harga Crypto</h2>
+      <div class="card">
+        <p><strong>Bitcoin (BTC):</strong> <span id="btc-price">Memuat...</span></p>
+        <p><strong>Ethereum (ETH):</strong> <span id="eth-price">Memuat...</span></p>
       </div>
     </section>
 
@@ -304,6 +323,48 @@
         form.reset();
       });
     }
+
+    // SKILL CHART pakai Chart.js
+    const ctx = document.getElementById('skillsChart');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['TypeScript','React','Node.js','Next.js','CSS','Database'],
+        datasets: [{
+          label: 'Skill Level',
+          data: [90, 85, 80, 75, 70, 65],
+          backgroundColor: 'rgba(34,211,238,0.2)',
+          borderColor: 'rgba(34,211,238,1)',
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(34,211,238,1)'
+        }]
+      },
+      options: {
+        scales: {
+          r: {
+            angleLines: { color: '#1e293b' },
+            grid: { color: '#1e293b' },
+            pointLabels: { color: '#e2e8f0' },
+            ticks: { color: '#e2e8f0', backdropColor: 'transparent' }
+          }
+        }
+      }
+    });
+
+    // CRYPTO PRICE fetch
+    async function loadPrices(){
+      try{
+        const res=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd");
+        const data=await res.json();
+        document.getElementById("btc-price").textContent="$"+data.bitcoin.usd.toLocaleString();
+        document.getElementById("eth-price").textContent="$"+data.ethereum.usd.toLocaleString();
+      }catch(e){
+        document.getElementById("btc-price").textContent="Gagal memuat";
+        document.getElementById("eth-price").textContent="Gagal memuat";
+      }
+    }
+    loadPrices();
+    setInterval(loadPrices, 60000); // update tiap menit
   </script>
 </body>
 </html>
