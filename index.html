@@ -221,6 +221,93 @@
       }
     }
     loadCryptoNews();
+      <!-- Tambahan fitur -->
+  <button id="scrollTopBtn" title="Kembali ke atas">⬆️</button>
+
+  <style>
+    /* Scroll to top button */
+    #scrollTopBtn {
+      display:none;
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      z-index:100;
+      border:none;
+      outline:none;
+      background:var(--card);
+      color:var(--text);
+      cursor:pointer;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      box-shadow:0 4px 14px rgba(0,0,0,.3);
+      transition:opacity .3s;
+    }
+    #scrollTopBtn:hover{opacity:.85}
+
+    /* Reader mode toggle */
+    .reader-mode body{font-size:18px;line-height:1.8}
+    .reader-mode p{max-width:70ch}
+
+    /* Fade-in animation */
+    .fade{opacity:0;transform:translateY(20px);transition:all .6s ease}
+    .fade.show{opacity:1;transform:none}
+  </style>
+
+  <script>
+    // Scroll to top
+    const scrollBtn=document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll",()=>{
+      if(document.documentElement.scrollTop>200){
+        scrollBtn.style.display="block";
+      }else{
+        scrollBtn.style.display="none";
+      }
+    });
+    scrollBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+    // Reader mode toggle pakai shortcut "R"
+    document.addEventListener("keydown",e=>{
+      if(e.key.toLowerCase()==="r"){
+        document.body.classList.toggle("reader-mode");
+      }
+    });
+
+    // Fade-in tiap section
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+        }
+      });
+    },{threshold:.15});
+    document.querySelectorAll(".section, .hero").forEach(sec=>{
+      sec.classList.add("fade");
+      observer.observe(sec);
+    });
+
+    // Simple contact form handler (hanya alert demo)
+    const form=document.getElementById("contact-form");
+    if(form){
+      form.addEventListener("submit",e=>{
+        e.preventDefault();
+        alert("Pesan terkirim! (demo)");
+        form.reset();
+      });
+    }
+  </script>
+
+  <!-- Form kontak tambahan -->
+  <section class="section container" style="max-width:600px">
+    <h2>Kirim Pesan</h2>
+    <form id="contact-form" class="grid" style="gap:12px">
+      <input type="text" class="input" placeholder="Nama" required>
+      <input type="email" class="input" placeholder="Email" required>
+      <textarea class="input" style="height:100px" placeholder="Pesan..." required></textarea>
+      <button class="btn hvr" type="submit">Kirim</button>
+    </form>
+  </section>
+
   </script>
 </body>
 </html>
